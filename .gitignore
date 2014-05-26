@@ -1,0 +1,37 @@
+# Make the file global with this command
+# git config --global core.excludesfile ~/.gitignore
+
+#Ignore log files
+log/
+*.log
+
+#Ignore lab files
+lab/
+*lab
+lab.*
+
+#Ignore generated files, including surefire reports
+target/
+build/
+
+#Ignore Screen shots
+screenshot
+
+#Ignore tmp folder
+tmp
+
+#Ignore Eclipse project files
+.settings
+.classpath
+.project
+
+#Ignore IntelliJ project files
+.idea
+*.iml
+*.iws
+
+#Ignore OS X files
+.DS_Store
+
+#Ignore packer cache folder
+packer_cache

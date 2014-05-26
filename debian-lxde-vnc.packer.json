@@ -1,0 +1,30 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami": "ami-039f6474",
+      "instance_type": "m3.medium",
+      "ssh_username": "admin",
+      "ssh_timeout": "8m",
+      "ami_name": "debian-lxde-vnc {{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/",
+      "destination": "/home/admin"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/pre-installation.sh",
+        "scripts/debian-update-upgrade.sh",
+        "scripts/install-lxde-vnc.sh",
+        "scripts/initialize-vnc.sh",
+        "scripts/create-ssh-key.sh"
+      ]
+    }
+  ]
+}

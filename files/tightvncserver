@@ -1,0 +1,50 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          Autostart tightvncserver
+# Required-Start:
+# Required-Stop:
+# Should-Start:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: script used to do something
+# Description:
+### END INIT INFO
+ 
+export USER='admin'
+eval cd ~$USER
+ 
+. /lib/lsb/init-functions
+ 
+case "${1}" in
+("start")
+    log_action_begin_msg "Starting tightvncserver... Please wait"
+    #RUN A COMMAND USED TO START THE SCRIPT, EXAMPLE: 
+    su $USER -c 'tightvncserver :1 -geometry 1600x900'
+    log_action_end_msg $?
+    exit $?
+    ;;
+("stop")
+    log_action_begin_msg "Stopping tightvncserver... Please wait"
+    pkill Xtightvnc
+    log_action_end_msg $?
+    exit $?
+    ;;
+("restart")
+    "${0}" stop
+    "${0}" start
+    ;;
+("status")
+    #sudo su $USER
+    if [ `ps -ef |grep Xtightvnc |wc -l` -gt 1 ]; then
+        log_success_msg "${0} running"
+    else
+        log_success_msg "${0} stopped"
+    fi
+    ;;
+(*)
+    log_success_msg "Script usage: /etc/init.d/startup-script {start|stop|restart|status}" >&2
+    exit 3
+    ;;
+esac
+ 
+:
