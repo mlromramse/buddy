@@ -7,7 +7,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "admin",
       "ssh_timeout": "8m",
-      "ami_name": "debian-lxde-vnc {{timestamp}}"
+      "ami_name": "debian-lxde-vnc-jmeter-slave {{timestamp}}"
     }
   ],
   "provisioners": [
@@ -26,9 +26,8 @@
       "scripts": [
         "scripts/pre-installation.sh",
         "scripts/debian-update-upgrade.sh",
-        "scripts/install-lxde-vnc.sh",
-        "scripts/initialize-vnc.sh",
-        "scripts/create-ssh-key.sh"
+        "scripts/install-java.sh",
+        "scripts/install-jmeter.sh"
       ]
     }
   ]

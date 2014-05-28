@@ -6,7 +6,8 @@ echo "# Installing softwares"
 echo "## Install lxde xorg and tightvncserver"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lxde xorg tightvncserver
 
-export DISPLAY="localhost:1"
+echo "# Disable screensaver"
+sudo sed -i '/@xscreensave/d' /etc/xdg/lxsession/LXDE/autostart
 
 echo "# Move autostart script to /etc/init.d"
 sudo mv tightvncserver /etc/init.d/.

@@ -9,7 +9,9 @@ Buddy is an open source project to simplify creation of Amazon Machine Images.
 The goal for this project is to create regeneratable images with the help of packer.
 The project can create these images with a simple command line execution:
 
-* Debian VNC enabled server for cloud side graphical verifications like running Apache JMeter or testing web pages.
+* __debian-lxde-vnc.packer.json__ Debian VNC enabled server for cloud side graphical verifications like running Apache JMeter or testing web pages.
+* __debian-lxde-vnc.packer-jmeter-master.json__ Debian VNC enabled server with Java and Apache JMeter including packer and ec2-api-tools.
+* __debian-lxde-vnc.packer-jmeter-slave.json__ Debian server without head with Java and Apache JMeter for multiple slave creations.
 
 
 
@@ -50,9 +52,13 @@ The project copies files to the AMI and installs applications.
 
 ### Folders
 
-* root folder - here you find the packer.json files that conducts the AMI creation.
-* files - all the files in this folder is copied to the AMI folder `/home/admin`.
-* scripts - a set of scripts that is used by the packer.json files in the root directory of this project.
+* _root folder_ - here you find the packer.json files that conducts the AMI creation.
+* __debian-files__ - all the files in this folder is good to have for debian. Copied to the AMI folder `/home/admin` with the help of the file provisioner. See the packer.json file.
+* __doc__ - Documentation on each of the packer.json files in the root folder.
+* __ec2-admin-scripts__ - Utility tools to use the created AMIs
+* _packer_cache_ - Temporary directory used by packer. Included in the .gitignore thus not in the project. Is created by packer on first packer build run.
+* __scripts__ - a set of scripts that is used by the packer.json files in the root directory of this project.
+* __vnc-files__ - all the files in this folder is needed for vnc to work. Copied to the AMI folder `/home/admin` with the help of the file provisioner. See the packer.json file.
 
 
 
