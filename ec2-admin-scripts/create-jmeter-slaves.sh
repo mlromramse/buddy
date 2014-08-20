@@ -13,6 +13,10 @@ if [[ "$AMI_ID_SLAVE" == "" ]]; then
   ERROR="$ERROR\n * The environment variable AMI_ID_SLAVE has to be set."
 fi
 
+if [[ "$AMI_ZONE" == "" ]]; then
+  ERROR="$ERROR\n * The environment variable AMI_ZONE has to be set. E.g. eu-west-1a"
+fi
+
 if [[ "$KEY_NAME" == "" ]]; then
   ERROR="$ERROR\n * The environment variable KEY_NAME has to be set."
 fi
@@ -42,5 +46,5 @@ fi
 
 NEW_SLAVES=$(($1-$NO_OF_SLAVES))
 
-ec2run "$AMI_ID_SLAVE" -k "$KEY_NAME" -g "$SECURITY_GROUP_SLAVE" -t 'm3.medium' -n "$NEW_SLAVES"
+ec2run "$AMI_ID_SLAVE" -k "$KEY_NAME" -g "$SECURITY_GROUP_SLAVE" -t 'm3.medium' -n "$NEW_SLAVES" -z "$AMI_ZONE"
 
