@@ -27,7 +27,7 @@
         "scripts/pre-installation.sh",
         "scripts/debian-update-upgrade.sh",
         "scripts/install-java.sh",
-        "scripts/install-jmeter.sh"
+        "scripts/install-jmeter.sh",
         "scripts/initialize-jmeter-server.sh"
       ]
     }
