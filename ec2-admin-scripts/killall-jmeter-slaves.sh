@@ -1,6 +1,7 @@
 #!/bin/bash
-
 ERROR=""
+
+printf "\n\nThe $0 script is starting\n"
 
 # Prerequisits
 
@@ -21,3 +22,4 @@ fi
 
 ec2din |grep "$AMI_ID_SLAVE.*running.*$SECURITY_GROUP_SLAVE" |cut -f2 |ec2kill -
 
+printf "\n\nThe $0 script has ended.\n"
