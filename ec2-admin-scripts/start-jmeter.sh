@@ -1,5 +1,8 @@
 #!/bin/bash -e
+DIR=`dirname $0`
 ERROR=""
+
+printf "\n\nThe $0 script is starting\n"
 
 
 if [[ $1 != "" ]]; then
@@ -36,9 +39,9 @@ fi
 
 # Create slaves phase
 
-if [[ WANTED_NO_OF_SLAVES > 0 ]]; then
+if [[ WANTED_NO_OF_SLAVES -gt 0 ]]; then
 	echo "There are $WANTED_NO_OF_SLAVES slaves wanted, creating..."
-	./create-jmeter-slaves.sh "$WANTED_NO_OF_SLAVES"
+	"$DIR/"create-jmeter-slaves.sh "$WANTED_NO_OF_SLAVES"
 fi
 
 echo "Checking running instances..."
@@ -70,16 +73,18 @@ echo "...starting jmeter with $NO_OF_SLAVES slaves attached."
 
 # Kill slaves phase
 
-if [[ WANTED_NO_OF_SLAVES > 0 ]]; then
-	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, running in foreground."
+if [[ WANTED_NO_OF_SLAVES -gt 0 ]]; then
+	echo "$WANTED_NO_OF_SLAVES slaves where created from this script."
+	echo "They will be terminated when JMeter ends, thus running Apache JMeter in the foreground."
 	/opt/apache-jmeter-2.11/bin/jmeter -p ~/jmeter.properties &> jmeter-running.log
-	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, killing all."
-	./killall-jmeter-slaves.sh
+	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, killing them all."
+	"$DIR/"killall-jmeter-slaves.sh
 else
-	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, running in background."
+	echo "No slaves where created from this script, thus running Apache JMeter in the background."
 	/opt/apache-jmeter-2.11/bin/jmeter -p ~/jmeter.properties &> jmeter-running.log &
 fi
 
+printf "\n\nThe $0 script has ended\n"
 echo
 
 :

@@ -35,3 +35,6 @@ tmp
 
 #Ignore packer cache folder
 packer_cache
+
+#Ignore buddy specific files
+current_slaves_ip

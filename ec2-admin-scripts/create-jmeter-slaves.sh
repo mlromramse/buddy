@@ -1,6 +1,7 @@
 #!/bin/bash -e
-
 ERROR=""
+
+printf "\n\nThe $0 script is starting\n"
 
 # Prerequisits check
 
@@ -60,3 +61,4 @@ do
   echo "...$NO_OF_SLAVES slaves pending..."
 done
 
+printf "\nThe $0 script has ended\n\n"
