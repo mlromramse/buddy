@@ -41,7 +41,7 @@ done
 
 if [[ $1 -le $NO_OF_SLAVES ]]; then
   printf "\nThere are $NO_OF_SLAVES running jmeter-slave instances already\n\n"
-  exit 1
+  exit 0
 fi
 
 NEW_SLAVES=$(($1-$NO_OF_SLAVES))
