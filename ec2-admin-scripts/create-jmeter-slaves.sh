@@ -57,6 +57,6 @@ NO_OF_SLAVES=1
 while [[ "$NO_OF_SLAVES" != "0" ]]
 do
   NO_OF_SLAVES=`ec2din |grep "$AMI_ID_SLAVE.*pending.*$SECURITY_GROUP_SLAVE" |cut -f18 |wc -l`
-  echo "...still $NO_OF_SLAVES running..."
+  echo "...$NO_OF_SLAVES slaves pending..."
 done
 

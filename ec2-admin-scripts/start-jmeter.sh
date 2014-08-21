@@ -1,6 +1,18 @@
 #!/bin/bash -e
-
 ERROR=""
+
+
+if [[ $1 != "" ]]; then
+	if [[ $1 == "--help" || $1 == "-h" ]]; then
+		echo "usage:  start-jmeter.sh no-of-slaves"
+		exit 0
+	fi
+	WANTED_NO_OF_SLAVES=$(($1))
+	echo "$WANTED_NO_OF_SLAVES slaves wanted."
+	if [[ $WANTED_NO_OF_SLAVES == 0 ]]; then
+		ERROR="$ERROR\n * Wanted number of slaves has to be greater than 0."
+	fi
+fi
 
 # Prerequisits
 
@@ -19,6 +31,14 @@ fi
 if [[ "$ERROR" != "" ]]; then
   printf "\nRequired prerequisits are not met:$ERROR\n\n"
   exit 1
+fi
+
+
+# Create slaves phase
+
+if [[ WANTED_NO_OF_SLAVES > 0 ]]; then
+	echo "There are $WANTED_NO_OF_SLAVES slaves wanted, creating..."
+	./create-jmeter-slaves.sh "$WANTED_NO_OF_SLAVES"
 fi
 
 echo "Checking running instances..."
@@ -46,7 +66,19 @@ echo "remote_hosts=`cat current_slaves_ip |paste -s -d, -`" >> ~/jmeter.properti
 
 echo "...starting jmeter with $NO_OF_SLAVES slaves attached."
 
-/opt/apache-jmeter-2.11/bin/jmeter -p ~/jmeter.properties &> jmeter-running.log &
+
+
+# Kill slaves phase
+
+if [[ WANTED_NO_OF_SLAVES > 0 ]]; then
+	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, running in foreground."
+	/opt/apache-jmeter-2.11/bin/jmeter -p ~/jmeter.properties &> jmeter-running.log
+	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, killing all."
+	./killall-jmeter-slaves.sh
+else
+	echo "$WANTED_NO_OF_SLAVES slaves where created from this script, running in background."
+	/opt/apache-jmeter-2.11/bin/jmeter -p ~/jmeter.properties &> jmeter-running.log &
+fi
 
 echo
 
