@@ -46,5 +46,15 @@ fi
 
 NEW_SLAVES=$(($1-$NO_OF_SLAVES))
 
+echo "Creating $NEW_SLAVES slaves since $NO_OF_SLAVES slaves already was running."
+
 ec2run "$AMI_ID_SLAVE" -k "$KEY_NAME" -g "$SECURITY_GROUP_SLAVE" -t 'm3.medium' -n "$NEW_SLAVES" -z "$AMI_ZONE"
+
+echo "...waiting for pending instances..."
+
+while [[ "$NO_OF_SLAVES" != "0" ]]
+do
+  NO_OF_SLAVES=`ec2din |grep "$AMI_ID_SLAVE.*pending.*$SECURITY_GROUP_SLAVE" |cut -f18 |wc -l`
+  echo "...still $NO_OF_SLAVES running..."
+done
 

@@ -27,7 +27,7 @@ NO_OF_SLAVES="1"
 
 echo "...waiting for pending instances..."
 
-while [[ "$NO_OF_SLAVES" == "0" ]]
+while [[ "$NO_OF_SLAVES" != "0" ]]
 do
   ec2din |grep "$AMI_ID_SLAVE.*pending.*$SECURITY_GROUP_SLAVE" |cut -f18 > current_slaves_ip
   NO_OF_SLAVES=`cat current_slaves_ip |wc -l`
