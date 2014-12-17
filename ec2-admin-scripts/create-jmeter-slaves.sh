@@ -1,5 +1,6 @@
 #!/bin/bash -e
 ERROR=""
+CREATED=`date +%s`
 
 printf "\n\nThe $0 script is starting\n"
 
@@ -60,5 +61,10 @@ do
   NO_OF_SLAVES=`ec2din |grep "$AMI_ID_SLAVE.*pending.*$SECURITY_GROUP_SLAVE" |cut -f18 |wc -l`
   echo "...$NO_OF_SLAVES slaves pending..."
 done
+
+echo "...tagging the new slaves..."
+
+ec2din |grep "$AMI_ID_SLAVE.*running.*$SECURITY_GROUP_SLAVE" |cut -f2 > instances.log
+cat instances.log |ec2tag - --tag "Name=debian-lxde-jmeter-slave $CREATED"
 
 printf "\nThe $0 script has ended\n\n"
