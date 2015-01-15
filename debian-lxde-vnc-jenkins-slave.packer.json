@@ -1,4 +1,7 @@
 {
+  "variables": {
+    "user": "{{env `EC2_VNC_USER`}}"  
+  },
   "builders": [
     {
       "type": "amazon-ebs",
@@ -7,7 +10,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "admin",
       "ssh_timeout": "8m",
-      "ami_name": "debian-lxde-vnc-jmeter-slave {{timestamp}}"
+      "ami_name": "debian-lxde-vnc-jenkins-slave {{timestamp}}"
     }
   ],
   "provisioners": [
@@ -22,13 +25,25 @@
       "destination": "/home/admin"
     },
     {
+      "type": "file",
+      "source": "secrets/id_rsa_jenkins.pub",
+      "destination": "/home/admin/id_rsa_jenkins.pub"
+    },
+    {
       "type": "shell",
+      "environment_vars": ["EC2_VNC_USER={{user `user`}}"],
       "scripts": [
         "scripts/pre-installation.sh",
+        "scripts/add-user.sh",
         "scripts/debian-update-upgrade.sh",
         "scripts/install-java.sh",
+        "scripts/install-lxde-vnc.sh",
+        "scripts/install-chrome.sh",
+        "scripts/install-firefox.sh",
         "scripts/install-jmeter.sh",
-        "scripts/initialize-jmeter-server.sh"
+        "scripts/initialize-jenkins.sh",
+        "scripts/initialize-vnc.sh",
+        "scripts/create-ssh-key.sh"
       ]
     }
   ]

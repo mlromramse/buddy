@@ -3,8 +3,8 @@ echo "###################################################################"
 echo "# install-java.sh"
 
 echo "# Installing softwares"
-echo "## Install Java 7 runtime"
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jre
+echo "## Install Java 7 JDK"
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y openjdk-7-jdk
 
 echo "## Setup .bash_aliases"
 echo 'export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64"' >> /home/admin/.bash_aliases

@@ -9,15 +9,20 @@
 # Short-Description: script used to do something
 # Description:
 ### END INIT INFO
+
+if [ -f /etc/default/tightvncserver ];
+then
+  . /etc/default/tightvncserver
+fi;
  
-export USER='admin'
-eval cd ~$USER
+export USER=$EC2_VNC_USER
+eval cd /home/$USER
  
 . /lib/lsb/init-functions
  
 case "${1}" in
 ("start")
-    log_action_begin_msg "Starting tightvncserver... Please wait"
+    log_action_begin_msg "Starting tightvncserver for user $USER. Please wait..."
     #RUN A COMMAND USED TO START THE SCRIPT, EXAMPLE: 
     su $USER -c 'tightvncserver :1 -geometry 1600x900'
     log_action_end_msg $?

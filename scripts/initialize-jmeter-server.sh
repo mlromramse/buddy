@@ -10,7 +10,7 @@ cat > jmeter-server <<EOF_MARKER
 # Carry out specific functions when asked to by the system
 case "\$1" in
   start)
-    /opt/apache-jmeter-2.11/bin/jmeter-server
+    /opt/apache-jmeter/bin/jmeter-server
     ;;
   stop)
     kill \`ps h -C java -o "%p|%a" |cut -d\| -f1\`

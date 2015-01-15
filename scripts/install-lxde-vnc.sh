@@ -13,4 +13,9 @@ echo "# Move autostart script to /etc/init.d"
 sudo mv tightvncserver /etc/init.d/.
 sudo chown root:root /etc/init.d/tightvncserver
 sudo chmod +x /etc/init.d/tightvncserver
-sudo chmod +x /home/admin/.vnc/xstartup
+if [ "$EC2_VNC_USER" != "" ];
+then
+	sudo chmod +x /home/$EC2_VNC_USER/.vnc/xstartup
+else
+	sudo chmod +x /home/admin/.vnc/xstartup
+fi

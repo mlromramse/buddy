@@ -34,6 +34,7 @@ Make sure to set up all the environment variables that is needed for packer and 
 Remember to put your environment variable setup in your .bashrc or similar file.
 Without these you will fail to do anything with buddy.
 
+* EC2_VNC_USER - the username for the vnc account, will be used in all scripts
 * AWS_ACCESS_KEY - your personal aws access key to your account on Amazon
 * AWS_SECRET_KEY - your personal aws secret key to your account on Amazon
 * JAVA_HOME - the path to your java installation, where the bin, jre and lib folders live
@@ -111,7 +112,7 @@ Do this to launch an instance:
 	b. Add another `Custom TSP Rule` with port 5901 and Source `My IP`
 12. Click on `[ Review and Launch ]` and make sure there are no warnings on the page you get.
 13. Click on `[ Launch ]`
-14. On this final step you have to select a key-pair that you have access to. Do that and tick the `I aknowledge...` checkbox and click the `[ Launch Instances ]` button.
+14. On this final step you have to select a key-pair that you have access to. Do that and tick the `I acknowledge...` checkbox and click the `[ Launch Instances ]` button.
 15. Click on the `[ View Instances ]` button to go back to your list of instances. In that view you will find your instance pending and slowly starting. When the Status Checks has gone through you can access the instance through your VNC Viewer of choice or by SSH.
 
 

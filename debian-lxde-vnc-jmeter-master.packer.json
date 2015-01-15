@@ -3,7 +3,7 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-1",
-      "source_ami": "ami-039f6474",
+      "source_ami": "ami-9c62cdeb",
       "instance_type": "m3.medium",
       "ssh_username": "admin",
       "ssh_timeout": "8m",
