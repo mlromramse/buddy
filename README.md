@@ -12,6 +12,7 @@ The project can create these images with a simple command line execution:
 * __debian-lxde-vnc.packer.json__ Debian VNC enabled server for cloud side graphical verifications like running Apache JMeter or testing web pages.
 * __debian-lxde-vnc.packer-jmeter-master.json__ Debian VNC enabled server with Java and Apache JMeter including packer and ec2-api-tools.
 * __debian-lxde-vnc.packer-jmeter-slave.json__ Debian server without head with Java and Apache JMeter for multiple slave creations.
+* __ubuntu-lxde-vnc-jenkins-slave.packer.json__ Ubuntu machine with head and complete with Java, Google-Chrome, Firefox, JMeter and Jenkins uset and setup.
 
 
 
@@ -59,6 +60,7 @@ The project copies files to the AMI and installs applications.
 * __ec2-admin-scripts__ - Utility tools to use the created AMIs
 * _packer_cache_ - Temporary directory used by packer. Included in the .gitignore thus not in the project. Is created by packer on first packer build run.
 * __scripts__ - a set of scripts that is used by the packer.json files in the root directory of this project.
+* __secrets__ - This non versioned folder should be created and filled with the Jenkins master's id_rsa_jenkins.pub and the maven settings.xml file.
 * __vnc-files__ - all the files in this folder is needed for vnc to work. Copied to the AMI folder `/home/admin` with the help of the file provisioner. See the packer.json file.
 
 
@@ -127,7 +129,7 @@ Enter the ip found, eg 123.45.67.89, followed by colon and 5901 to connect to th
 
 	123.45.67.89:5901
 
-_You will shortly be asked for a password. In this setup the password is `password`. Unsecure as this is you can change that yourself if you want._
+_You will shortly be asked for a password. In this setup the password is `password`. Unsecure as this is you can change that yourself if you want in the script `initialize-vnc.sh`._
 
 
 
@@ -135,7 +137,7 @@ _You will shortly be asked for a password. In this setup the password is `passwo
 
 When connecting to the instance from your terminal the way to do this is quite different:
 
-1. Select the instance by clicking its name.
+1. Select the instance, in the amazon aws console, by clicking its name.
 2. Click on the `[ Connect ]` button.
 3. Follow the instructions on the page shown.
 

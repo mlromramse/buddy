@@ -6,7 +6,7 @@
     {
       "type": "amazon-ebs",
       "region": "eu-west-1",
-      "source_ami": "ami-9c62cdeb",
+      "source_ami": "ami-7047fc07",
       "instance_type": "m3.medium",
       "ssh_username": "admin",
       "ssh_timeout": "8m",
@@ -26,8 +26,8 @@
     },
     {
       "type": "file",
-      "source": "secrets/id_rsa_jenkins.pub",
-      "destination": "/home/admin/id_rsa_jenkins.pub"
+      "source": "secrets/",
+      "destination": "/home/admin"
     },
     {
       "type": "shell",
@@ -37,6 +37,7 @@
         "scripts/add-user.sh",
         "scripts/debian-update-upgrade.sh",
         "scripts/install-java.sh",
+        "scripts/install-dev-tools.sh",
         "scripts/install-lxde-vnc.sh",
         "scripts/install-chrome.sh",
         "scripts/install-firefox.sh",
